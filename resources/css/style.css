@@ -11,16 +11,33 @@ Orange Color: #e67e22
 * {
     margin: 0;
     padding: 0;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-html {
+html,
+body {
     background-color: #fff;
     color: #555;
     font-family: 'Lato', 'Arial';
     font-weight: 300;
     font-size: 20px;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
+/*.clearfix {zoom: 1}*/
+
+.clearfix:after {
+    content: ".";
+    clear:both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+li {
+    list-style: none;
 }
 
 /* ----------------------------------------*/
@@ -28,12 +45,16 @@ html {
 /* ----------------------------------------*/
 
 .row {
-    max-width: 1140px;
+    max-width: 1240px;
     margin: 0 auto;
 }
 
 .box {
     padding: 1%
+}
+
+a {
+    color: #e67e22;
 }
 
 /* ----- HEADINGS -----*/
@@ -55,11 +76,12 @@ h1 {
 }
 
 h2 {
-    margin:30px auto;
+    margin:30px auto 80px auto;
     font-size: 180%;
     word-spacing: 2px;
     text-align: center;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 h2:after {
@@ -98,11 +120,18 @@ h3 {
     color: #e67e22;
 }
 
+.icon-small {
+    font-size: 150%;
+    padding-right: 20px;
+    color: #e67e22;
+}
+
 
 /* ----- BUTTONS -----*/
 
 .btn:link,
-.btn:visited{
+.btn:visited,
+input[type=submit]{
     display: inline-block;
     margin-right: 20px;
     padding: 10px 30px;
@@ -110,11 +139,13 @@ h3 {
     text-decoration: none;
     border-radius: 200px;
     color: #fff;
+    -webkit-transition: .3s;
     transition: .3s;
 }
 
 .btn-full:link,
-.btn-full:visited {
+.btn-full:visited,
+input[type=submit]{
     background-color: #e67e22; 
     border: 1px solid #e67e22;
 }
@@ -122,6 +153,7 @@ h3 {
 .btn-ghost:link,
 .btn-ghost:visited{
     border: 1px solid #e67e22;
+    color: #e67e22;
 }
 
 .btn:hover,
@@ -137,6 +169,13 @@ h3 {
 .btn-ghost:hover,
 .btn-ghost:active{
     border: 1px solid #bf6516;
+    color: #fff;
+}
+
+/* ----- BUTTONS -----*/
+
+section {
+    padding: 60px 0 30px 0;
 }
 
 /* ----------------------------------------*/
@@ -144,9 +183,11 @@ h3 {
 /* ----------------------------------------*/
 
 header {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,.5)), to(#000)), url(img/hero.jpg);
     background-image: linear-gradient(rgba(0,0,0,.5), #000), url(img/hero.jpg);
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     height: 100vh;
 }
 .hero-text-box {
@@ -154,6 +195,7 @@ header {
     width: 50%;
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
     text-align: left;
 }
@@ -165,7 +207,19 @@ header {
     margin-top: 20px;
 }
 
+.logo-black {
+    display: none;
+    height: 50px;
+    width: auto;
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Main Navigation */
+
 .main-nav {
+    display:block;
     float:right;
     list-style: none;
     margin-top: 45px;
@@ -184,6 +238,7 @@ header {
     text-transform: uppercase;
     font-size: 90%;
     border-bottom: 2px solid transparent;
+    -webkit-transition: border-bottom 0.2s;
     transition: border-bottom 0.2s;
 }
 
@@ -191,8 +246,56 @@ header {
 .main-nav li a:active {
     border-bottom: 2px solid #e67e22;
 }
+
+/* Sticky Navi */
+
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255,255,255,0.98);
+    box-shadow: 0 2px 2px #efefef;
+    z-index: 999999;
+}
+
+.sticky .main-nav {
+    float:right;
+    list-style: none;
+    margin-top: 18px;
+}
+
+.sticky .main-nav li a:link,
+.sticky .main-nav li a:visited {
+    padding: 18px 0;
+    color: #555;
+}
+
+.sticky .logo-black {
+    display: block;
+}
+
+.sticky .logo {
+    display: none;
+}
+
+/* Mobile Navi */
+
+.mobile-nav-icon {
+    float: right;
+    margin-top: 30px;
+    cursor: pointer;
+    color: #f3f3f3;
+    display: none;
+}
+
+.mobile-nav-icon ion-icon {
+    font-size: 230%;
+}
+
+
 /* ----------------------------------------*/
-/* MEALS SECTION */
+/* FEATURES SECTION */
 /* ----------------------------------------*/
 
 .section-features .long-copy {
@@ -203,6 +306,10 @@ header {
 /* ----------------------------------------*/
 /* MEALS SECTION */
 /* ----------------------------------------*/
+
+.section-meals {
+    padding: 0;
+}
 
 .meals-showcase {
     list-style: none;
@@ -227,20 +334,26 @@ header {
     opacity: 0.8;
     width: 100%;
     height: auto;
+    -webkit-transform: scale(1.2);
     transform: scale(1.2);
+    -webkit-transition: 0.5s;
     transition: 0.5s;
 }
 
 .meal-photo img:hover {
     opacity: 1;
+    -webkit-transform: scale(1.03);
     transform: scale(1.03)
 }
 
 
 /* ----------------------------------------*/
-/* HOW IT WORKS */
+/* 4 - HOW IT WORKS */
 /* ----------------------------------------*/
 
+.section-steps {
+    background-color: #f4f4f4;
+}
 
 .steps-box:first-child {
     text-align: right;
@@ -254,11 +367,15 @@ header {
 }
 
 .app-screen {
-    width: 30%
+    width: 40%
 }
 
 .works-step {
     margin-bottom: 50px;
+}
+
+.work-step:last-of-type {
+    margin-bottom: 80px;
 }
 
 .works-step div {
@@ -274,9 +391,255 @@ header {
     float: left;
 }
 
+.btn-app img{
+    height: 40px;
+    width: auto;
+    margin: 10px;
+}
+
+/* ----------------------------------------*/
+/* 5 - WHE'RE CURRENTLY IN THESE CITIES */
+/* ----------------------------------------*/
+
+.city-photo {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: #f4f4f4;
+}
+
+.city-photo img {
+    opacity: 0.8;
+    width: 100%;
+    height: auto;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.city-photo img:hover {
+    opacity: 1;
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03)
+}
+
+h3.city-tittles{
+    margin-top: 15px;
+}
+
+.section-cities p {
+    margin-bottom: 10px;
+}
+
+.section-cities a {
+    padding-bottom: 4px;
+    text-decoration: none;
+    border-bottom: 2px solid #e67e22;
+}
+
+/* ----------------------------------------*/
+/* 7 - TESTIMONIALS */
+/* ----------------------------------------*/
+
+.section-testimonials {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,.5)), to(#000)), url(../img/back-customers.jpg);
+    background-image: linear-gradient(rgba(0,0,0,.5), #000), url(../img/back-customers.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100%;
+    color: #fff;
+}
+
+blockquote {
+    padding: 5%;
+    font-style: italic;
+    line-height: 140%;
+    position: relative;
+}
+
+blockquote::before{
+    content: "\201C";
+    display: block;
+    font-size: 500%;
+    position: absolute;
+    top:-5px;
+    left: -5px;
+}
+
+cite {
+    font-size: 90%;
+    margin-top: 25px;
+    display: block;
+}
+
+cite img {
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
 
 
+/* ----------------------------------------*/
+/* 8 - PLANS */
+/* ----------------------------------------*/
 
+.section-plans {
+    background-color: #f4f4f4;
+    height: 100%;
+}
+
+.plan-box {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 5%;
+    -webkit-box-shadow: 0 2px 2px #efefef;
+    box-shadow: 0 2px 2px #efefef;
+}
+
+.plan-box div {
+    padding: 15px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.plan-box div:first-child {
+    background-color: #fcfcfc;
+    border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.plan-box div:last-child {
+    text-align: center;
+    border: 0;
+}
+
+.plan-price {
+    font-size: 200%;
+    font-weight: 100;
+    margin-bottom: 10px;
+    color: #e67e22;
+}
+
+.plan-price span {
+    font-size: 50%;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.plan-price-meal {
+    font-size: 80%;
+}
+
+/* ----------------------------------------*/
+/* 9 - PLANS */
+/* ----------------------------------------*/
+
+.contact-form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+input[type=text],
+input[type=email],
+select,
+textarea {
+    width: 100%;
+    padding: 7px;
+    border-radius: 3px;
+}
+
+textarea {
+    height: 100px;
+}
+
+input[type=checkbox] {
+    margin: 10px 5px 10px 0;
+    
+}
+
+*:focus {outline: none;} 
+
+/* ----------------------------------------*/
+/* 10 - FOOTER */
+/* ----------------------------------------*/
+
+footer {
+    background-color: #333;
+    padding: 40px;
+}
+
+.footer-nav li{
+    float: left;
+    display: block;
+    margin-right: 20px;
+    font-size: 90%;
+}
+
+.social-links li{
+    float: right;
+    display: block;
+    margin-right: 20px;
+    font-size: 120%;
+}
+
+.social-links li ion-icon:hover,
+.social-links li ion-icon:active {
+    color: #e67e22;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.social-links li:first-of-type{
+    margin-right: 0px;
+}
+
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-links li a:link,
+.social-links li a:visited {
+    color: #888;
+    text-decoration: none;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+.footer-nav li a:hover,
+.footer-nav li a:active {
+    color: #ddd;
+}
+
+footer p {
+    font-size: 90%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* ----------------------------------------*/
+/* ANIMATIONS */
+/* ----------------------------------------*/
+
+.js--wp1,
+.js--wp2,
+.js--wp3{
+    opacity: 0;
+    animation: 1s,
+}
+
+.js--wp4 {
+    animation: 1s
+}
+
+.js--wp1 .animated,
+.js--wp2 .animated,
+.js--wp3 .animated,
+.js--wp4 .animated{
+    opacity: 1;
+}
 
 
 
